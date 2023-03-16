@@ -32,8 +32,11 @@ filter {
   if [type] == "syslog" {
     grok {
       match => { "message" => "%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?: %{GREEDYDATA:syslog_message}" }
-    }
-
+      if [xxx] not in [xxx] {
+      	drop {}                      
+      }
+   }
+	
     syslog_pri { }
 
     date {
@@ -64,11 +67,6 @@ output {
 /etc/logstash/conf.d/ 
 ```
 
-
-
-
-
 ## Reference 
 
 * https://www.elastic.co/guide/en/logstash/8.6/installing-logstash.html#_yum
-* 
