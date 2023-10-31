@@ -7,6 +7,15 @@
 ```c++
 // insert an element into the beginning of the vector
 v.insert(v.begin, element);
+
+// sort the vector 
+sort(v.begin(), v.end(), [](const auto& op1, const auto& op2){
+  return op1.xxx > op2.xxx;
+})
+// if the compare function return true, means the index of that element is smaller.
+  
+// initialize 2-dimension vector 
+// iteration
 ```
 
 * unordered_map
