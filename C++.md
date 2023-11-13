@@ -60,3 +60,17 @@ int main() {
 
 the difference between unordered_map and map in C++
 
+## Swap
+
+```
+// when swap two variable in-place, it's recommended that using swap function.
+```
+
+## 2-dimension array initialization
+
+```
+int dp[2][2] = {{1, 1}, {2, 2}, {3, 3}, {4, 4}};
+```
+
+
+

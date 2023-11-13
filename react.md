@@ -59,6 +59,16 @@ function DataFetcher() {
 export default DataFetcher;
 ```
 
+## useRef
+
+```react
+useRef<type>(null)
+```
+
+
+
+
+
  ## Typewriter
 
 * 
@@ -113,3 +123,108 @@ export default App;
 The `aria-controls` attribute of the `NavbarToggle` component is set to match the `id` of the `NavbarCollapse`, so they are associated with each other. This is essential for accessibility and ensuring screen readers can understand the collapsible navigation.
 
 This setup creates a responsive navigation bar with a toggle button for small screens. When the screen size is reduced, the navigation links are hidden, and clicking the toggle button reveals them.
+
+## Filter
+
+```react
+tags.filter(tag => { tag != 'happy'})
+```
+
+## map
+
+```react
+tags.map(tag => { tag == 'happy' ? r1 : r2})
+```
+
+## reduce
+
+```react
+expenses.reduce((acc, expense) => { expense.amount + acc})
+```
+
+
+
+## produce
+
+```react
+setBugs(produce(draft => {
+	const bug = draft.find(bug => bug.id === 1);
+  if (bug) bug.fixed = true;
+}))
+```
+
+## Sharing State between Components.
+
+```react
+# change the state on the parent of two components if you need to share the state between them.
+```
+
+## Zod Library for validation
+
+
+
+## onChange
+
+```
+onChange = {(event) => setPerson({..person, name: event.target.value})}
+```
+
+
+
+## react-hook-form
+
+```react
+import {useForm} from "react-hook-form"
+
+const {register} = useForm();
+```
+
+
+
+```react
+{ errors.name?.type === 'required' && xxx } 
+```
+
+
+
+# Build an App from scratch.
+
+## using Vite to generate the infrastructure code.
+
+```shell
+npm create vite@latest
+```
+
+
+
+```
+// make the button to right-most
+<ModalCloseButton ml="auto"/>   
+
+```
+
+
+
+//
+
+The function of justifyContent  ?
+
+<Center> </Center
+
+center layout?
+
+<CardBody p={0}> set no padding
+
+
+
+To handle the problem 
+
+```react
+function GifAnimation({ name }: { name?: string }) { }
+```
+
+
+
+
+
+as 的作用
