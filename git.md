@@ -40,6 +40,8 @@ $ git rm file_form (git add file_form)
 $ git add file_to
 
 $ git status -p (patch) -stat --pretty=oneline
+
+$ git ls-remote https://xxx
 ```
 
 ## Undoing Things
@@ -188,6 +190,8 @@ $ git diff master...contrib
 
 # cherry-pick
 $ git cherry-pick e43a6
+# revert: reverse operation of cherry-pick
+$ git revert xxx 
 
 # genrating a build number
 $ git describe master
@@ -208,8 +212,24 @@ $ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz
 
 * \r: Carriage return
 * \n: Line feed
-* `refspec` : 
+* `refspec` `fetch =` is a refspec  : adding the following line to fetch, your can get pull request as a local branch name `refs/remotes/origin/pr/*` when you typing `git fetch`  
+
+  ```
+  [remote "origin"]
+  		url = https://github.com/libgit2/libgit2
+  		fetch = +refs/heads/:refs/remotes/origin/*
+  		fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+  ```
+
+  
 * `-u`: --set-upstream
+* Think of `reflog` as Git's version of shell history.
+* `^` caret `~` tilde
+* The difference between `checkout` and `reset`
+
+  * `checkout` is working-directory safe. `reset --hard` will simply replace everything across the board without checking
+  * `reset` move the branch that `HEAD` points to, `checkout` move `HEAD` itself to point to another branch.
+
 
 ## Github flavored Markdown
 
@@ -218,3 +238,108 @@ $ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz
 - [x] write the code
 - [ ] Write all the tests.
 - [ ] Document the code
+
+* **Quoting** 
+
+> This is quoted.
+
+* emoji
+
+:clap:
+
+## Keep your GitHub public repository up-to-date
+
+```shell
+$ git remote add progit git:github.com/xxx
+$ git fetch progit
+$ git branch --set-upstream-to=progit/master master
+$ git config --local remote.pushDefault origin
+```
+
+## Hook
+
+
+
+## Commit Range
+
+```shell
+# shows the commit of experiment that is not involved in master branch
+$ git log master...experiment
+```
+
+
+
+## Stashing and Cleaning
+
+```shell
+# If you don't want to do a commit of half-done work just so you can get back to this point later, you can use stash command.
+$ git stash 
+
+$ git stash apply --index # restaged the staged files.
+$ git stash apply # will continue have it on your stack.
+$ git stash pop # will drop it from stack
+
+$ git stash branch <new branchname> # create a new branch for you with your selected branch name
+```
+
+
+
+## Rewriting History
+
+```shell
+# changing the last commit
+$ git commit --amend
+
+# use rebase -i to edit commit
+$ git rebase -i 
+```
+
+
+
+## Merge Conflicts
+
+1. Make sure your working directory is clean before doing a merge that may have conflicts.
+
+```shell
+$ git merge abort # revert back to your state before you ran the merge
+
+# `-Xignore-space-change` ignores whitespace completely when comparing lines.
+# `whitespace` treas sequences of one or more whitespace characters as equivalent
+# This is a lifesaver if you have someone on your team who likes to occasionally reformat everything from spaces to tabs or vice-versa.
+$ git merge -Xignore-space-change whitespace 
+```
+
+
+
+## Undoing Merge
+
+
+
+## Submodule
+
+```shell
+# It will generate .gitmodules 
+$ git submodule add https://xxx
+
+# clone a repository with submodule
+$ git clone 
+$ git submodule init 
+$ git submodule update
+# =
+$ git submodule update --init (--recursive)
+# =
+$ git clone --rescurse-submodules https://
+
+# update submoduel
+$ git submodule update --remote
+
+# set the submodule.recurse to true
+$ git config --global submodule.recurse true
+
+# set config
+$ git config push.recurseSubmodules on-demand(or check)
+
+# foreach for submodule
+$ git submodule foreach 'git stash'
+```
+
